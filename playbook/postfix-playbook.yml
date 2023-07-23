@@ -1,0 +1,17 @@
+---
+- name: Установка и удаление Postfix
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Установка Postfix
+      package:
+        name: postfix
+        state: present
+      tags: init_postfix
+
+    - name: Удаление Postfix
+      package:
+        name: postfix
+        state: absent
+      tags: drop_postfix

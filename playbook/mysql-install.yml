@@ -1,0 +1,54 @@
+---
+- name: Install MySQL
+  hosts: mysql
+  become: yes
+
+  tasks:
+    - name: Update apt cache (for Debian/Ubuntu)
+      apt:
+        update_cache: yes
+      when: ansible_pkg_mgr == 'apt'
+
+    - name: Install MySQL packages for Debian/Ubuntu
+      package:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - mysql-server
+        - mysql-client
+        - python3-pymysql
+      when: ansible_pkg_mgr == 'apt'
+
+    - name: Install MySQL packages for Red Hat/CentOS
+      package:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - mysql-server
+        - mysql-client
+        - python3-PyMySQL
+      when: ansible_pkg_mgr == 'yum'
+
+    - name: Start MySQL service (for systemd-based systems)
+      service:
+        name: mysql
+        state: started
+      when: ansible_service_mgr == 'systemd'
+
+    - name: Start MySQL service (for sysvinit-based systems)
+      service:
+        name: mysql
+        state: started
+      when: ansible_service_mgr == 'sysvinit'
+
+    - name: Enable MySQL service (for systemd-based systems)
+      service:
+        name: mysql
+        enabled: yes
+      when: ansible_service_mgr == 'systemd'
+
+    - name: Enable MySQL service (for sysvinit-based systems)
+      service:
+        name: mysql
+        enabled: yes
+      when: ansible_service_mgr == 'sysvinit'
