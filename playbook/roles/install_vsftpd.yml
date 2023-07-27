@@ -1,0 +1,8 @@
+---
+- name: Install and start vsftpd
+  hosts: docker  # Замените на ваш целевой сервер или группу хостов
+  become: yes
+
+  roles:
+    - vsftpd_role
+
