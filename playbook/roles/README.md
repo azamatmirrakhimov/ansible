@@ -7,7 +7,7 @@ ansible-galaxy init vsftpd_role
 # Шаг 2: Определение задач установки и запуска vsftpd
 Отредактируем файлы в директории нашей роли.
 2.1 Отредактируйте vsftpd_role/tasks/main.yml
-~~
+~~~
 ---
 # tasks file for vsftpd_role
 
