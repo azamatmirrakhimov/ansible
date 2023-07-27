@@ -22,3 +22,22 @@ ansible-galaxy init vsftpd_role
     state: started
     enabled: yes
 ~~~
+2.2 Отредактируйте vsftpd_role/meta/main.yml
+
+~~~
+---
+# metadata file for vsftpd_role
+
+dependencies: []
+~~~
+# Шаг 3: Создание плейбука для применения роли
+Теперь создадим плейбук, который будет применять нашу роль на целевом сервере. Создайте файл с именем install_vsftpd.yml
+~~~
+---
+- name: Install and start vsftpd
+  hosts: your_target_server  # Замените на ваш целевой сервер или группу хостов
+  become: yes
+
+  roles:
+    - vsftpd_role
+~~~
