@@ -35,9 +35,13 @@ dependencies: []
 ~~~
 ---
 - name: Install and start vsftpd
-  hosts: your_target_server  # Замените на ваш целевой сервер или группу хостов
+  hosts: docer  # Замените на ваш целевой сервер или группу хостов в моем случае группа называеться "docker"
   become: yes
 
   roles:
     - vsftpd_role
+~~~
+# Шаг 4: Запуск плейбука
+~~~
+ansible-playbook install_vsftpd.yml
 ~~~
