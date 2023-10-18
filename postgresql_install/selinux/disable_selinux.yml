@@ -1,0 +1,16 @@
+---
+- name: Firewalld
+  hosts: servers
+  become: yes
+   
+  tasks:
+    - name: Allow ports
+      firewalld:
+        port: "{{ item }}"
+        permanent: true
+        state: enabled
+      loop: ['5432/tcp']
+      notify:
+        - firewall-cmd --restart
+
+
