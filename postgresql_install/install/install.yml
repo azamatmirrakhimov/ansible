@@ -1,0 +1,12 @@
+---
+- name: Install and Update Packages
+    hosts: servers
+    become: yes  # Run tasks with become (sudo)
+
+    tasks:
+      - name: Install net-tools and telnet
+        dnf:
+          name:
+            - net-tools
+            - telnet
+          state: present
